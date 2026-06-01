@@ -6,3 +6,5 @@ def subtract(a, b):
 
 def multiply(a, b):
     return a * b
+
+# Version 1.0.0 - stable release
