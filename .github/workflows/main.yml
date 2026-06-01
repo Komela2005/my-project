@@ -27,3 +27,22 @@ jobs:
     - name: Run tests
       run: |
         pytest tests/ -v
+
+    - name: Generate documentation
+      run: |
+        mkdir -p docs_build
+        cp docs/*.md docs_build/
+        echo "<html><body><h1>MyProject Documentation</h1>" > docs_build/index.html
+        echo "<p>Version: $(cat version.txt 2>/dev/null || echo 'dev')</p>" >> docs_build/index.html
+        echo "<h2>Functions</h2><ul>" >> docs_build/index.html
+        echo "<li>add(a, b) - returns sum</li>" >> docs_build/index.html
+        echo "<li>subtract(a, b) - returns difference</li>" >> docs_build/index.html
+        echo "<li>multiply(a, b) - returns product</li>" >> docs_build/index.html
+        echo "</ul></body></html>" >> docs_build/index.html
+        
+    - name: Deploy documentation to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs_build
+      if: github.ref == 'refs/heads/main'
