@@ -42,10 +42,4 @@ jobs:
           echo "<hr><p>Version: 1.0.0</p>" >> docs_build/index.html
           echo "</body></html>" >> docs_build/index.html
           echo "Documentation generated successfully!"
-
-    - name: Deploy documentation to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs_build
-      if: github.ref == 'refs/heads/main'
+          echo "You can find it in the docs_build folder of the workflow run."
